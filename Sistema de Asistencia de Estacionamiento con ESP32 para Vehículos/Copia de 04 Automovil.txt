@@ -175,8 +175,8 @@ void loop() {
 #include <Servo.h>
 
 // Wi-Fi
-const char* ssid = "TU_SSID";
-const char* password = "TU_CONTRASEÑA";
+const char* ssid = "ARRIS-AAE2";
+const char* password = "C3Y4M1D487870816";
 
 // Pines sensores
 const int pinTrig = 5;
@@ -270,7 +270,7 @@ void manejarServidor() {
       cliente.print("{\"distancia\": ");
       cliente.print(distancia);
       cliente.println("}");
-    } 
+    }
     else if (request.indexOf("GET /estado") >= 0) {
       cliente.println("HTTP/1.1 200 OK");
       cliente.println("Content-Type: application/json");
@@ -1583,7 +1583,7 @@ otras
   made on 15 Dec 2020
   by Amir Mohammad Shojaee @ Electropeak
   Home
-  
+
 */
 #define dirPin1 33
 #define stepPin1 13
@@ -1608,4 +1608,3 @@ void loop() {
   digitalWrite(stepPin2, LOW);
   delayMicroseconds(500);
 }
-
