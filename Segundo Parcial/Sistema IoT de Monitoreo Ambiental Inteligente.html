@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema IoT de Monitoreo Ambiental - Presentación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .presentation {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: white;
+            margin: 20px 0;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .slide h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        .slide h2 {
+            color: #34495e;
+            font-size: 2em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slide h3 {
+            color: #2980b9;
+            font-size: 1.5em;
+            margin: 20px 0 10px 0;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(52, 73, 94, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        /* Slide específicos */
+        .cover-slide {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .cover-slide h1 {
+            color: white;
+            font-size: 3em;
+            border-bottom: 3px solid white;
+            margin-bottom: 30px;
+        }
+
+        .student-info {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .student-info p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .ods-card {
+            background: linear-gradient(135deg, #e8f8f5, #d1f2eb);
+            border-left-color: #27ae60;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+            border-left-color: #f39c12;
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, #eaf2f8, #d6eaf8);
+            border-left-color: #3498db;
+        }
+
+        .component-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .hardware, .software {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+
+        .hardware {
+            border-color: #e74c3c;
+        }
+
+        .software {
+            border-color: #3498db;
+        }
+
+        .hardware h4 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .software h4 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .component-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .component-icon {
+            width: 30px;
+            height: 30px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+        }
+
+        .diagram-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 25px 0;
+            border: 2px dashed #bdc3c7;
+        }
+
+        .connection-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .device {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            min-width: 120px;
+        }
+
+        .device::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            color: #666;
+            font-size: 1.5em;
+        }
+
+        .device:last-child::after {
+            display: none;
+        }
+
+        .steps-container {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+            padding-left: 70px;
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .result-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+        }
+
+        .result-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .thanks-slide {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .thanks-slide h1 {
+            color: white;
+            border-bottom-color: white;
+            font-size: 3em;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+                margin: 10px 0;
+            }
+
+            .slide h1 {
+                font-size: 2em;
+            }
+
+            .slide h2 {
+                font-size: 1.5em;
+            }
+
+            .grid, .component-list {
+                grid-template-columns: 1fr;
+            }
+
+            .connection-diagram {
+                flex-direction: column;
+            }
+
+            .device::after {
+                display: none;
+            }
+        }
+
+        .print-note {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2c3e50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+
+        @media print {
+            .print-note {
+                display: none;
+            }
+
+            .slide {
+                page-break-after: always;
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Portada -->
+        <div class="slide cover-slide">
+            <div class="slide-number">1/12</div>
+            <h1>🌱 EcoMonitor Smart</h1>
+            <h3>Sistema IoT de Monitoreo y Respuesta con Visualización en Tiempo Real</h3>
+
+            <div class="student-info">
+                <p><strong>Estudiante:</strong> Cesar Humberto Garcia Galindo]</p>
+                <p><strong>Matrícula:</strong> [0323105932]</p>
+                <p><strong>Asignatura:</strong> Aplicaciones IoT</p>
+                <p><strong>Docente:</strong> Maria del Carmen Vargas García</p>
+                <p><strong>Fecha:</strong> Agosto 2025</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introducción -->
+        <div class="slide">
+            <div class="slide-number">2/12</div>
+            <h2><span class="icon">📋</span>Introducción</h2>
+
+            <p style="font-size: 1.2em; margin-bottom: 25px;">El Internet de las Cosas (IoT) representa una revolución tecnológica que conecta objetos cotidianos a internet, permitiendo la recolección y análisis de datos en tiempo real para la toma de decisiones inteligentes.</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>🌐 Relevancia del IoT</h3>
+                    <p>Transforma espacios tradicionales en ambientes inteligentes que responden automáticamente a las condiciones del entorno, optimizando recursos y mejorando la calidad de vida.</p>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Enfoque del Proyecto</h3>
+                    <p>Desarrollo de un sistema de monitoreo ambiental que integra sensores, actuadores y visualización en tiempo real para crear espacios más saludables y sostenibles.</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 30px; font-style: italic; color: #7f8c8d;">Este proyecto demuestra cómo la tecnología IoT puede aplicarse para resolver problemas reales relacionados con la calidad del aire y el bienestar humano.</p>
+        </div>
+
+        <!-- Slide 3: ODS -->
+        <div class="slide">
+            <div class="slide-number">3/12</div>
+            <h2><span class="icon">🎯</span>Objetivo de Desarrollo Sostenible</h2>
+
+            <div class="ods-card card">
+                <h3>🏥 ODS 3: Salud y Bienestar</h3>
+                <p><strong>"Garantizar una vida sana y promover el bienestar para todos en todas las edades"</strong></p>
+
+                <h4 style="margin-top: 20px; color: #27ae60;">🌱 Cómo contribuye nuestro proyecto:</h4>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li><strong>Calidad del aire:</strong> Monitorea niveles de gases tóxicos y partículas contaminantes</li>
+                    <li><strong>Prevención:</strong> Alerta temprana sobre condiciones ambientales peligrosas</li>
+                    <li><strong>Espacios saludables:</strong> Automatiza la ventilación para mantener aire limpio</li>
+                    <li><strong>Bienestar:</strong> Mejora la calidad de vida en hogares, oficinas y espacios públicos</li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top: 25px;">
+                <h3>🌍 Impacto Secundario: ODS 11 - Ciudades Sostenibles</h3>
+                <p>También contribuye a crear comunidades más sostenibles mediante el monitoreo inteligente de la calidad ambiental urbana.</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Contexto y Problema -->
+        <div class="slide">
+            <div class="slide-number">4/12</div>
+            <h2><span class="icon">🏢</span>Contexto y Descripción del Problema</h2>
+
+            <div class="problem-card card">
+                <h3>📍 Contexto de Aplicación</h3>
+                <p><strong>Espacios cerrados con alta ocupación:</strong> oficinas, aulas, hogares, centros comerciales, y espacios de trabajo donde la calidad del aire puede deteriorarse rápidamente.</p>
+            </div>
+
+            <h3 style="color: #e74c3c; margin: 25px 0;">⚠️ Problemas Identificados:</h3>
+
+            <div class="grid">
+                <div class="card">
+                    <h4>🚫 Contaminación Indoor</h4>
+                    <p>Acumulación de CO₂, gases tóxicos y partículas que afectan la salud respiratoria y el rendimiento cognitivo.</p>
+                </div>
+
+                <div class="card">
+                    <h4>😴 Falta de Conciencia</h4>
+                    <p>Las personas no perciben el deterioro gradual de la calidad del aire hasta que es demasiado tarde.</p>
+                </div>
+
+                <div class="card">
+                    <h4>🔄 Ventilación Ineficiente</h4>
+                    <p>Sistemas manuales que no responden automáticamente a las condiciones cambiantes del ambiente.</p>
+                </div>
+
+                <div class="card">
+                    <h4>📊 Sin Datos Históricos</h4>
+                    <p>Ausencia de registros que permitan identificar patrones y optimizar las condiciones ambientales.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Propuesta de Solución -->
+        <div class="slide">
+            <div class="slide-number">5/12</div>
+            <h2><span class="icon">💡</span>Propuesta de Solución</h2>
+
+            <div class="solution-card card">
+                <h3>🌟 EcoMonitor Smart</h3>
+                <p><strong>Sistema IoT inteligente</strong> que monitorea continuamente la calidad del aire y activa automáticamente medidas correctivas para mantener un ambiente saludable.</p>
+            </div>
+
+            <h3>⚙️ Funcionalidades del Sistema:</h3>
+
+            <div class="grid">
+                <div class="card">
+                    <h4>📊 Monitoreo Continuo</h4>
+                    <ul style="padding-left: 20px; margin-top: 10px;">
+                        <li>Temperatura y humedad ambiental</li>
+                        <li>Niveles de gases (CO₂, CO, NH₃)</li>
+                        <li>Calidad del aire en tiempo real</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🤖 Respuesta Automática</h4>
+                    <ul style="padding-left: 20px; margin-top: 10px;">
+                        <li>Activación de ventiladores</li>
+                        <li>Alertas visuales (LED)</li>
+                        <li>Notificaciones sonoras</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📱 Visualización Digital</h4>
+                    <ul style="padding-left: 20px; margin-top: 10px;">
+                        <li>Dashboard web en tiempo real</li>
+                        <li>Gráficos históricos</li>
+                        <li>Alertas remotas</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>☁️ Almacenamiento Cloud</h4>
+                    <ul style="padding-left: 20px; margin-top: 10px;">
+                        <li>Datos en Firebase</li>
+                        <li>Acceso desde cualquier lugar</li>
+                        <li>Análisis de tendencias</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Objetivo del Proyecto -->
+        <div class="slide">
+            <div class="slide-number">6/12</div>
+            <h2><span class="icon">🎯</span>Objetivo del Proyecto</h2>
+
+            <div class="card" style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; text-align: center; padding: 40px;">
+                <h3 style="color: white; font-size: 1.8em;">🚀 Objetivo Principal</h3>
+                <p style="font-size: 1.3em; margin: 20px 0;">Desarrollar e implementar un sistema IoT integral que monitoree automáticamente las condiciones ambientales de espacios cerrados y active respuestas inteligentes para mantener un entorno saludable, con visualización de datos en tiempo real.</p>
+            </div>
+
+            <h3 style="margin: 30px 0 20px;">📋 Objetivos Específicos:</h3>
+
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Implementar sensores ambientales</h4>
+                    <p>Integrar sensor DHT22 para temperatura/humedad y MQ-135 para calidad del aire en un microcontrolador ESP32.</p>
+                </div>
+
+                <div class="step">
+                    <h4>Desarrollar sistema de respuesta</h4>
+                    <p>Configurar actuadores (LED, buzzer, ventilador) que respondan automáticamente a condiciones ambientales críticas.</p>
+                </div>
+
+                <div class="step">
+                    <h4>Crear base de datos en tiempo real</h4>
+                    <p>Establecer conexión con Firebase para almacenar y sincronizar datos ambientales continuamente.</p>
+                </div>
+
+                <div class="step">
+                    <h4>Desarrollar interfaz de visualización</h4>
+                    <p>Construir dashboard web responsive que muestre datos actuales, históricos y alertas del sistema.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Componentes -->
+        <div class="slide">
+            <div class="slide-number">7/12</div>
+            <h2><span class="icon">🔧</span>Lista de Componentes</h2>
+
+            <div class="component-list">
+                <div class="hardware">
+                    <h4>🔩 Hardware</h4>
+
+                    <div class="component-item">
+                        <div class="component-icon">🖥️</div>
+                        <div>
+                            <strong>ESP32 DevKit V1</strong><br>
+                            <small>Microcontrolador principal con WiFi/Bluetooth</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">🌡️</div>
+                        <div>
+                            <strong>Sensor DHT22</strong><br>
+                            <small>Temperatura y humedad relativa</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">💨</div>
+                        <div>
+                            <strong>Sensor MQ-135</strong><br>
+                            <small>Calidad del aire (CO₂, NH₃, CO)</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">💡</div>
+                        <div>
+                            <strong>LED RGB</strong><br>
+                            <small>Indicador visual de estado</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">🔊</div>
+                        <div>
+                            <strong>Buzzer Activo</strong><br>
+                            <small>Alertas sonoras</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">🌀</div>
+                        <div>
+                            <strong>Mini Ventilador 5V</strong><br>
+                            <small>Sistema de ventilación automática</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">🔌</div>
+                        <div>
+                            <strong>Accesorios</strong><br>
+                            <small>Protoboard, cables jumper, resistencias</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software">
+                    <h4>💻 Software</h4>
+
+                    <div class="component-item">
+                        <div class="component-icon">🔥</div>
+                        <div>
+                            <strong>Firebase Realtime DB</strong><br>
+                            <small>Base de datos en tiempo real</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">⚡</div>
+                        <div>
+                            <strong>Arduino IDE</strong><br>
+                            <small>Desarrollo para ESP32</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">🌐</div>
+                        <div>
+                            <strong>HTML/CSS/JavaScript</strong><br>
+                            <small>Dashboard web responsive</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">📚</div>
+                        <div>
+                            <strong>Librerías ESP32</strong><br>
+                            <small>WiFi, DHT, FirebaseESP32</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">📊</div>
+                        <div>
+                            <strong>Chart.js</strong><br>
+                            <small>Gráficos en tiempo real</small>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-icon">🎨</div>
+                        <div>
+                            <strong>Bootstrap</strong><br>
+                            <small>Framework de diseño</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Diagrama de Conexión -->
+        <div class="slide">
+            <div class="slide-number">8/12</div>
+            <h2><span class="icon">📐</span>Diagrama Esquemático Electrónico</h2>
+
+                <div class="diagram-container" style="background: white; padding: 15px;">
+        <svg width="100%" height="480" viewBox="0 0 1100 480" style="border: 2px solid #2c3e50;">
+            <!-- Grid de referencia -->
+            <defs>
+                <pattern id="engineeringGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#engineeringGrid)"/>
+
+            <!-- ESP32 como IC -->
+            <g transform="translate(450, 200)">
+                <rect x="-70" y="-80" width="140" height="160" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="0" y="-55" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold">ESP32-DEVKIT-V1</text>
+                <text x="0" y="-40" text-anchor="middle" font-family="Arial" font-size="10">WiFi + Bluetooth</text>
+
+                <!-- Pines izquierdos -->
+                <line x1="-70" y1="-50" x2="-90" y2="-50" stroke="#000" stroke-width="2"/>
+                <text x="-80" y="-45" text-anchor="middle" font-size="9">4</text>
+                <text x="-100" y="-45" text-anchor="end" font-size="9">GPIO4</text>
+
+                <line x1="-70" y1="-20" x2="-90" y2="-20" stroke="#000" stroke-width="2"/>
+                <text x="-80" y="-15" text-anchor="middle" font-size="9">A0</text>
+                <text x="-100" y="-15" text-anchor="end" font-size="9">ADC</text>
+
+                <line x1="-70" y1="20" x2="-90" y2="20" stroke="#000" stroke-width="2"/>
+                <text x="-80" y="25" text-anchor="middle" font-size="9">3V3</text>
+                <text x="-105" y="25" text-anchor="end" font-size="9">+3.3V</text>
+
+                <line x1="-70" y1="50" x2="-90" y2="50" stroke="#000" stroke-width="2"/>
+                <text x="-80" y="55" text-anchor="middle" font-size="9">GND</text>
+
+                <!-- Pines derechos -->
+                <line x1="70" y1="-50" x2="90" y2="-50" stroke="#000" stroke-width="2"/>
+                <text x="80" y="-45" text-anchor="middle" font-size="9">16</text>
+                <text x="100" y="-45" text-anchor="start" font-size="9">GPIO16</text>
+
+                <line x1="70" y1="-30" x2="90" y2="-30" stroke="#000" stroke-width="2"/>
+                <text x="80" y="-25" text-anchor="middle" font-size="9">17</text>
+                <text x="100" y="-25" text-anchor="start" font-size="9">GPIO17</text>
+
+                <line x1="70" y1="-10" x2="90" y2="-10" stroke="#000" stroke-width="2"/>
+                <text x="80" y="-5" text-anchor="middle" font-size="9">18</text>
+                <text x="100" y="-5" text-anchor="start" font-size="9">GPIO18</text>
+
+                <line x1="70" y1="10" x2="90" y2="10" stroke="#000" stroke-width="2"/>
+                <text x="80" y="15" text-anchor="middle" font-size="9">19</text>
+                <text x="100" y="15" text-anchor="start" font-size="9">GPIO19</text>
+
+                <line x1="70" y1="30" x2="90" y2="30" stroke="#000" stroke-width="2"/>
+                <text x="80" y="35" text-anchor="middle" font-size="9">21</text>
+                <text x="100" y="35" text-anchor="start" font-size="9">GPIO21</text>
+
+                <line x1="70" y1="50" x2="90" y2="50" stroke="#000" stroke-width="2"/>
+                <text x="80" y="55" text-anchor="middle" font-size="9">5V</text>
+                <text x="100" y="55" text-anchor="start" font-size="9">+5V</text>
+            </g>
+
+            <!-- DHT22 -->
+            <g transform="translate(180, 150)">
+                <rect x="-35" y="-25" width="70" height="50" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="0" y="-5" text-anchor="middle" font-size="11" font-weight="bold">DHT22</text>
+                <text x="0" y="8" text-anchor="middle" font-size="8">T°/HUM</text>
+
+                <line x1="35" y1="-15" x2="55" y2="-15" stroke="#000" stroke-width="2"/>
+                <text x="60" y="-10" text-anchor="start" font-size="8">VCC</text>
+                <line x1="35" y1="0" x2="55" y2="0" stroke="#000" stroke-width="2"/>
+                <text x="60" y="5" text-anchor="start" font-size="8">DATA</text>
+                <line x1="35" y1="15" x2="55" y2="15" stroke="#000" stroke-width="2"/>
+                <text x="60" y="20" text-anchor="start" font-size="8">GND</text>
+            </g>
+
+            <!-- Resistencia Pull-up DHT22 -->
+            <g transform="translate(280, 130)">
+                <path d="M 0 0 L 4 -4 L 12 4 L 20 -4 L 28 4 L 36 -4 L 40 0" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="20" y="-10" text-anchor="middle" font-size="8">R1=10kΩ</text>
+                <line x1="-10" y1="0" x2="0" y2="0" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="0" x2="50" y2="0" stroke="#000" stroke-width="2"/>
+            </g>
+
+            <!-- MQ-135 -->
+            <g transform="translate(180, 280)">
+                <rect x="-35" y="-25" width="70" height="50" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="0" y="-5" text-anchor="middle" font-size="11" font-weight="bold">MQ-135</text>
+                <text x="0" y="8" text-anchor="middle" font-size="8">AIR</text>
+
+                <line x1="35" y1="-10" x2="55" y2="-10" stroke="#000" stroke-width="2"/>
+                <text x="60" y="-5" text-anchor="start" font-size="8">VCC</text>
+                <line x1="35" y1="5" x2="55" y2="5" stroke="#000" stroke-width="2"/>
+                <text x="60" y="10" text-anchor="start" font-size="8">A0</text>
+                <line x1="35" y1="15" x2="55" y2="15" stroke="#000" stroke-width="2"/>
+                <text x="60" y="20" text-anchor="start" font-size="8">GND</text>
+            </g>
+
+            <!-- LEDs RGB con resistencias -->
+            <g transform="translate(650, 150)">
+                <!-- LED Red -->
+                <g transform="translate(0, -15)">
+                    <polygon points="0,0 12,6 0,12 4,6" fill="none" stroke="#000" stroke-width="2"/>
+                    <line x1="-15" y1="6" x2="0" y2="6" stroke="#000" stroke-width="2"/>
+                    <line x1="12" y1="6" x2="27" y2="6" stroke="#000" stroke-width="2"/>
+                    <path d="M 15 2 L 18 -1 M 15 2 L 16 -2" stroke="#000" stroke-width="1"/>
+                    <text x="6" y="20" text-anchor="middle" font-size="7">R</text>
+
+                    <g transform="translate(-50, 0)">
+                        <path d="M 0 6 L 4 2 L 12 10 L 20 2 L 28 10 L 32 6" fill="none" stroke="#000" stroke-width="2"/>
+                        <text x="16" y="-3" text-anchor="middle" font-size="7">R2=220Ω</text>
+                        <line x1="-8" y1="6" x2="0" y2="6" stroke="#000" stroke-width="2"/>
+                        <line x1="32" y1="6" x2="40" y2="6" stroke="#000" stroke-width="2"/>
+                    </g>
+                </g>
+
+                <!-- LED Green -->
+                <g transform="translate(0, 0)">
+                    <polygon points="0,0 12,6 0,12 4,6" fill="none" stroke="#000" stroke-width="2"/>
+                    <line x1="-15" y1="6" x2="0" y2="6" stroke="#000" stroke-width="2"/>
+                    <line x1="12" y1="6" x2="27" y2="6" stroke="#000" stroke-width="2"/>
+                    <path d="M 15 2 L 18 -1 M 15 2 L 16 -2" stroke="#000" stroke-width="1"/>
+                    <text x="6" y="20" text-anchor="middle" font-size="7">G</text>
+
+                    <g transform="translate(-50, 0)">
+                        <path d="M 0 6 L 4 2 L 12 10 L 20 2 L 28 10 L 32 6" fill="none" stroke="#000" stroke-width="2"/>
+                        <text x="16" y="-3" text-anchor="middle" font-size="7">R3=220Ω</text>
+                        <line x1="-8" y1="6" x2="0" y2="6" stroke="#000" stroke-width="2"/>
+                        <line x1="32" y1="6" x2="40" y2="6" stroke="#000" stroke-width="2"/>
+                    </g>
+                </g>
+
+                <!-- LED Blue -->
+                <g transform="translate(0, 15)">
+                    <polygon points="0,0 12,6 0,12 4,6" fill="none" stroke="#000" stroke-width="2"/>
+                    <line x1="-15" y1="6" x2="0" y2="6" stroke="#000" stroke-width="2"/>
+                    <line x1="12" y1="6" x2="27" y2="6" stroke="#000" stroke-width="2"/>
+                    <path d="M 15 2 L 18 -1 M 15 2 L 16 -2" stroke="#000" stroke-width="1"/>
+                    <text x="6" y="20" text-anchor="middle" font-size="7">B</text>
+
+                    <g transform="translate(-50, 0)">
+                        <path d="M 0 6 L 4 2 L 12 10 L 20 2 L 28 10 L 32 6" fill="none" stroke="#000" stroke-width="2"/>
+                        <text x="16" y="-3" text-anchor="middle" font-size="7">R4=220Ω</text>
+                        <line x1="-8" y1="6" x2="0" y2="6" stroke="#000" stroke-width="2"/>
+                        <line x1="32" y1="6" x2="40" y2="6" stroke="#000" stroke-width="2"/>
+                    </g>
+                </g>
+            </g>
+
+            <!-- Buzzer -->
+            <g transform="translate(680, 250)">
+                <circle cx="0" cy="0" r="15" fill="none" stroke="#000" stroke-width="2"/>
+                <path d="M -8 -4 L 8 -4 L 8 4 L -8 4 Z" fill="none" stroke="#000" stroke-width="2"/>
+                <line x1="-30" y1="0" x2="-15" y2="0" stroke="#000" stroke-width="2"/>
+                <line x1="15" y1="0" x2="30" y2="0" stroke="#000" stroke-width="2"/>
+                <text x="0" y="25" text-anchor="middle" font-size="8">BUZZ</text>
+            </g>
+
+            <!-- Ventilador con Transistor -->
+            <g transform="translate(680, 350)">
+                <!-- Motor -->
+                <circle cx="30" cy="0" r="20" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="30" y="5" text-anchor="middle" font-size="10" font-weight="bold">M</text>
+                <text x="30" y="25" text-anchor="middle" font-size="7">FAN</text>
+
+                <!-- Transistor NPN -->
+                <g transform="translate(-15, 0)">
+                    <line x1="-15" y1="0" x2="-5" y2="0" stroke="#000" stroke-width="2"/>
+                    <line x1="-5" y1="-12" x2="-5" y2="12" stroke="#000" stroke-width="3"/>
+                    <line x1="-5" y1="-8" x2="5" y2="-15" stroke="#000" stroke-width="2"/>
+                    <line x1="5" y1="-15" x2="5" y2="-25" stroke="#000" stroke-width="2"/>
+                    <line x1="-5" y1="8" x2="5" y2="15" stroke="#000" stroke-width="2"/>
+                    <line x1="5" y1="15" x2="5" y2="25" stroke="#000" stroke-width="2"/>
+                    <polygon points="0,12 5,15 0,15" fill="#000"/>
+                    <text x="0" y="35" text-anchor="middle" font-size="7">Q1</text>
+                    <text x="0" y="45" text-anchor="middle" font-size="6">2N2222</text>
+                </g>
+
+                <!-- Resistencia base -->
+                <g transform="translate(-60, 0)">
+                    <path d="M 0 0 L 4 -3 L 12 3 L 20 -3 L 28 3 L 32 0" fill="none" stroke="#000" stroke-width="2"/>
+                    <text x="16" y="-8" text-anchor="middle" font-size="7">R5=1kΩ</text>
+                    <line x1="-8" y1="0" x2="0" y2="0" stroke="#000" stroke-width="2"/>
+                    <line x1="32" y1="0" x2="40" y2="0" stroke="#000" stroke-width="2"/>
+                </g>
+
+                <line x1="10" y1="-25" x2="10" y2="0" stroke="#000" stroke-width="2"/>
+            </g>
+
+            <!-- Conexiones principales -->
+            <line x1="235" y1="150" x2="360" y2="150" stroke="#000" stroke-width="2"/>
+            <text x="297" y="145" text-anchor="middle" font-size="8">DHT_DATA</text>
+
+            <line x1="235" y1="135" x2="270" y2="135" stroke="#000" stroke-width="2"/>
+            <line x1="330" y1="130" x2="360" y2="130" stroke="#000" stroke-width="2"/>
+            <line x1="360" y1="130" x2="360" y2="220" stroke="#000" stroke-width="2"/>
+
+            <line x1="235" y1="285" x2="360" y2="285" stroke="#000" stroke-width="2"/>
+            <line x1="360" y1="285" x2="360" y2="180" stroke="#000" stroke-width="2"/>
+            <text x="297" y="280" text-anchor="middle" font-size="8">MQ_A0</text>
+
+            <line x1="540" y1="150" x2="580" y2="150" stroke="#000" stroke-width="2"/>
+            <line x1="580" y1="150" x2="580" y2="135" stroke="#000" stroke-width="2"/>
+            <line x1="580" y1="135" x2="592" y2="135" stroke="#000" stroke-width="2"/>
+
+            <line x1="540" y1="170" x2="585" y2="170" stroke="#000" stroke-width="2"/>
+            <line x1="585" y1="170" x2="585" y2="150" stroke="#000" stroke-width="2"/>
+            <line x1="585" y1="150" x2="592" y2="150" stroke="#000" stroke-width="2"/>
+
+            <line x1="540" y1="190" x2="590" y2="190" stroke="#000" stroke-width="2"/>
+            <line x1="590" y1="190" x2="590" y2="165" stroke="#000" stroke-width="2"/>
+            <line x1="590" y1="165" x2="592" y2="165" stroke="#000" stroke-width="2"/>
+
+            <line x1="540" y1="210" x2="650" y2="210" stroke="#000" stroke-width="2"/>
+            <line x1="650" y1="210" x2="650" y2="250" stroke="#000" stroke-width="2"/>
+
+            <line x1="540" y1="230" x2="560" y2="230" stroke="#000" stroke-width="2"/>
+            <line x1="560" y1="230" x2="560" y2="350" stroke="#000" stroke-width="2"/>
+            <line x1="560" y1="350" x2="612" y2="350" stroke="#000" stroke-width="2"/>
+
+            <!-- Alimentación -->
+            <line x1="360" y1="220" x2="360" y2="240" stroke="#000" stroke-width="3"/>
+            <line x1="330" y1="240" x2="390" y2="240" stroke="#000" stroke-width="3"/>
+            <text x="395" y="235" text-anchor="start" font-size="9">+3.3V</text>
+
+            <line x1="540" y1="250" x2="540" y2="270" stroke="#000" stroke-width="3"/>
+            <line x1="510" y1="270" x2="570" y2="270" stroke="#000" stroke-width="3"/>
+            <text x="575" y="265" text-anchor="start" font-size="9">+5V</text>
+
+            <!-- GND -->
+            <line x1="360" y1="250" x2="360" y2="290" stroke="#000" stroke-width="3"/>
+            <line x1="80" y1="290" x2="800" y2="290" stroke="#000" stroke-width="3"/>
+            <g transform="translate(360, 290)">
+                <line x1="0" y1="0" x2="0" y2="10" stroke="#000" stroke-width="2"/>
+                <line x1="-8" y1="10" x2="8" y2="10" stroke="#000" stroke-width="3"/>
+                <line x1="-5" y1="13" x2="5" y2="13" stroke="#000" stroke-width="2"/>
+                <line x1="-2" y1="16" x2="2" y2="16" stroke="#000" stroke-width="2"/>
+            </g>
+
+            <!-- Conexiones GND -->
+            <line x1="235" y1="165" x2="235" y2="290" stroke="#000" stroke-width="2"/>
+            <line x1="235" y1="295" x2="235" y2="290" stroke="#000" stroke-width="2"/>
+            <line x1="677" y1="135" x2="720" y2="135" stroke="#000" stroke-width="2"/>
+            <line x1="720" y1="135" x2="720" y2="290" stroke="#000" stroke-width="2"/>
+            <line x1="677" y1="150" x2="725" y2="150" stroke="#000" stroke-width="2"/>
+            <line x1="725" y1="150" x2="725" y2="290" stroke="#000" stroke-width="2"/>
+            <line x1="677" y1="165" x2="730" y2="165" stroke="#000" stroke-width="2"/>
+            <line x1="730" y1="165" x2="730" y2="290" stroke="#000" stroke-width="2"/>
+            <line x1="710" y1="250" x2="710" y2="290" stroke="#000" stroke-width="2"/>
+            <line x1="685" y1="375" x2="685" y2="290" stroke="#000" stroke-width="2"/>
+
+            <!-- Título -->
+            <text x="550" y="30" text-anchor="middle" font-size="14" font-weight="bold">ESQUEMÁTICO ELECTRÓNICO - ECOMONITOR SMART</text>
+            <text x="550" y="45" text-anchor="middle" font-size="10">Sistema IoT de Monitoreo Ambiental</text>
+        </svg>
+
+        <!-- Lista de componentes -->
+        <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; font-size: 11px;">
+            <div style="background: #f8f9fa; padding: 10px; border-radius: 5px;">
+                <strong>🔧 COMPONENTES PRINCIPALES:</strong><br>
+                • U1: ESP32 DevKit V1<br>
+                • U2: DHT22 (Temp/Hum)<br>
+                • U3: MQ-135 (Air Quality)<br>
+                • Q1: 2N2222 (Transistor NPN)
+            </div>
+            <div style="background: #f8f9fa; padding: 10px; border-radius: 5px;">
+                <strong>⚡ RESISTENCIAS:</strong><br>
+                • R1: 10kΩ (Pull-up DHT22)<br>
+                • R2,R3,R4: 220Ω (LEDs)<br>
+                • R5: 1kΩ (Base transistor)
+            </div>
+            <div style="background: #f8f9fa; padding: 10px; border-radius: 5px;">
+                <strong>🔌 ALIMENTACIÓN:</strong><br>
+                • VCC: +5V (USB)<br>
+                • Logic: +3.3V<br>
+                • GND: Común<br>
+                • I max: ~500mA
+            </div>
+        </div>
+    </div>
+
+    <!-- Nota técnica -->
+    <div style="background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 15px; border-radius: 10px; margin: 20px 0;">
+        <h4 style="color: white; margin-bottom: 10px;">📋 Notas del Diseño:</h4>
+        <p style="font-size: 12px; margin: 0;">
+            <strong>1.</strong> Esquemático siguiendo estándares IEEE para diagramas electrónicos |
+            <strong>2.</strong> Símbolos normalizados (IEC 60617) |
+            <strong>3.</strong> Conexiones punto a punto verificadas |
+            <strong>4.</strong> Valores de componentes calculados para operación segura
+        </p>
+    </div>
+
+
+            </p>
+        </div>
+
+        <!-- Slide 9: Pasos de Implementación -->
+        <div class="slide">
+            <div class="slide-number">9/12</div>
+            <h2><span class="icon">⚙️</span>Pasos de Implementación</h2>
+
+            <div class="steps-container">
+                <div class="step">
+                    <h4>🔧 Armado Físico</h4>
+                    <p>Conexión de componentes en protoboard siguiendo el diagrama eléctrico. Verificación de continuidad y voltajes apropiados en cada conexión.</p>
+                </div>
+
+                <div class="step">
+                    <h4>📱 Configuración Firebase</h4>
+                    <p>Creación de proyecto en Firebase Console, configuración de Realtime Database con reglas de seguridad y obtención de credenciales API.</p>
+                </div>
+
+                <div class="step">
+                    <h4>💻 Programación ESP32</h4>
+                    <p>Desarrollo del código principal que integra lecturas de sensores, lógica de control de actuadores y envío de datos a Firebase vía WiFi.</p>
+                </div>
+
+                <div class="step">
+                    <h4>🌐 Desarrollo Web Dashboard</h4>
+                    <p>Creación de interfaz web responsive con HTML/CSS/JavaScript que se conecta a Firebase y muestra datos en tiempo real con gráficos dinámicos

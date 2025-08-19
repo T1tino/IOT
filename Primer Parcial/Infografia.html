@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almacenamiento de Datos en IoT - Infografía</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .infographic {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="20" fill="url(%23smallGrid)" /></svg>');
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .student-name {
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 5px solid #3498db;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 30px;
+            height: 30px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .definition {
+            background: linear-gradient(135deg, #e8f4fd, #d1ecf1);
+            border-left-color: #17a2b8;
+        }
+
+        .applications {
+            background: linear-gradient(135deg, #e8f8e8, #d4edda);
+            border-left-color: #28a745;
+        }
+
+        .examples {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left-color: #ffc107;
+        }
+
+        .advantages {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-left-color: #28a745;
+        }
+
+        .limitations {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border-left-color: #dc3545;
+        }
+
+        .relationships {
+            background: linear-gradient(135deg, #e2e3e5, #d6d8db);
+            border-left-color: #6c757d;
+        }
+
+        .sources {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            border-left-color: #17a2b8;
+        }
+
+        .reflection {
+            background: linear-gradient(135deg, #e7e3ff, #d4bfff);
+            border-left-color: #6f42c1;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .storage-types {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .storage-type {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .storage-type:hover {
+            transform: scale(1.05);
+        }
+
+        .storage-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .local { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .edge { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .cloud { background: linear-gradient(135deg, #3498db, #2980b9); }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .pros, .cons {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pros {
+            border-left: 4px solid #28a745;
+        }
+
+        .cons {
+            border-left: 4px solid #dc3545;
+        }
+
+        .pros h4, .cons h4 {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .pros h4 { color: #28a745; }
+        .cons h4 { color: #dc3545; }
+
+        .pros ul, .cons ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .pros li, .cons li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .pros li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .cons li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .relationship-diagram {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .iot-elements {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .element {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .element::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            color: #666;
+            font-size: 1.5em;
+        }
+
+        .element:last-child::after {
+            display: none;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+
+            .storage-types {
+                flex-direction: column;
+            }
+
+            .iot-elements {
+                flex-direction: column;
+            }
+
+            .element::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic">
+        <!-- Header -->
+        <div class="header">
+            <h1>💾 Almacenamiento de Datos en IoT</h1>
+            <div class="subtitle">Gestión Eficiente de Información en el Internet de las Cosas</div>
+            <div class="student-name">Cesar Humberto Garcia Galindo</div>
+        </div>
+
+        <div class="content">
+            <!-- Definición -->
+            <div class="section definition">
+                <h2><span class="icon">📝</span>Definición del Concepto</h2>
+                <p>El <strong>almacenamiento de datos en IoT</strong> se refiere a los métodos, tecnologías y arquitecturas utilizadas para capturar, guardar, organizar y gestionar la información generada por dispositivos conectados en el Internet de las Cosas. Incluye desde el almacenamiento temporal en sensores hasta bases de datos masivas en la nube.</p>
+
+                <div class="storage-types">
+                    <div class="storage-type">
+                        <div class="storage-icon local">📱</div>
+                        <h3>Local</h3>
+                        <p>En el dispositivo IoT</p>
+                    </div>
+                    <div class="storage-type">
+                        <div class="storage-icon edge">🏢</div>
+                        <h3>Edge</h3>
+                        <p>Servidores cercanos</p>
+                    </div>
+                    <div class="storage-type">
+                        <div class="storage-icon cloud">☁️</div>
+                        <h3>Cloud</h3>
+                        <p>Servicios en la nube</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aplicaciones -->
+            <div class="section applications">
+                <h2><span class="icon">🔧</span>Aplicaciones en el Contexto de IoT</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>🏠 Smart Cities</h3>
+                        <p>Almacenamiento de datos de tráfico, calidad del aire, consumo energético y sistemas de transporte público para optimizar la gestión urbana.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🏥 Salud Digital</h3>
+                        <p>Registro continuo de signos vitales, historiales médicos y datos de wearables para monitoreo remoto de pacientes.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🏭 Industria 4.0</h3>
+                        <p>Datos de sensores de maquinaria, control de calidad, mantenimiento predictivo y optimización de procesos productivos.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🌱 Agricultura Inteligente</h3>
+                        <p>Información sobre humedad del suelo, condiciones climáticas, crecimiento de cultivos y automatización de riego.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplos Concretos -->
+            <div class="section examples">
+                <h2><span class="icon">💡</span>Ejemplos Concretos</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>🚗 Tesla Autopilot</h3>
+                        <p><strong>Almacenamiento:</strong> Los vehículos Tesla recopilan terabytes de datos de sensores, cámaras y radares. Estos datos se almacenan localmente durante la conducción y se sincronizan con servidores de Tesla para mejorar el algoritmo de conducción autónoma mediante machine learning.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🏠 Nest Thermostat</h3>
+                        <p><strong>Almacenamiento:</strong> El termostato inteligente de Google almacena patrones de uso, preferencias de temperatura y datos de ocupación tanto localmente como en Google Cloud, permitiendo aprendizaje automático para optimizar el consumo energético.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ventajas y Limitaciones -->
+            <div class="section advantages">
+                <h2><span class="icon">⚖️</span>Ventajas y Limitaciones</h2>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Ventajas</h4>
+                        <ul>
+                            <li>Análisis de big data para insights valiosos</li>
+                            <li>Respaldo y redundancia de información crítica</li>
+                            <li>Escalabilidad según demanda</li>
+                            <li>Acceso remoto y sincronización</li>
+                            <li>Machine learning e IA predictiva</li>
+                            <li>Optimización de recursos y costos</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>❌ Limitaciones</h4>
+                        <ul>
+                            <li>Preocupaciones de privacidad y seguridad</li>
+                            <li>Dependencia de conectividad a internet</li>
+                            <li>Costos de almacenamiento y transferencia</li>
+                            <li>Latencia en procesamiento</li>
+                            <li>Complejidad en gestión de datos</li>
+                            <li>Riesgo de obsolescencia tecnológica</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Relación con otros elementos -->
+            <div class="section relationships">
+                <h2><span class="icon">🔗</span>Relación con otros Elementos del Sistema IoT</h2>
+                <div class="relationship-diagram">
+                    <div class="iot-elements">
+                        <div class="element">Sensores/Actuadores</div>
+                        <div class="element">Conectividad</div>
+                        <div class="element">Procesamiento Edge</div>
+                        <div class="element">Almacenamiento</div>
+                        <div class="element">Analytics/IA</div>
+                        <div class="element">Aplicaciones</div>
+                    </div>
+                    <p style="margin-top: 20px; color: #666;">El almacenamiento actúa como el <strong>núcleo central</strong> que conecta la captura de datos con su procesamiento y análisis, habilitando la inteligencia del sistema IoT.</p>
+                </div>
+            </div>
+
+            <!-- Fuentes -->
+            <div class="section sources">
+                <h2><span class="icon">📚</span>Fuentes Consultadas</h2>
+                <div class="card">
+                    <p><strong>IEEE Internet of Things Journal</strong> - "Data Storage and Management in IoT Systems: A Comprehensive Survey" (2024)</p>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9em;">Revista académica especializada en tecnologías IoT con revisión por pares, que analiza las últimas tendencias en almacenamiento de datos para sistemas IoT distribuidos.</p>
+                </div>
+            </div>
+
+            <!-- Reflexión -->
+            <div class="section reflection">
+                <h2><span class="icon">💭</span>Reflexión Personal</h2>
+                <div class="card">
+                    <p><strong>"El almacenamiento de datos en IoT no es solo sobre guardar información, sino sobre crear valor a partir de ella."</strong></p>
+                    <p style="margin-top: 15px;">En un mundo donde cada dispositivo genera datos constantemente, la capacidad de almacenar, gestionar y analizar esta información de manera eficiente se convierte en la diferencia entre tener simples gadgets conectados o contar con sistemas verdaderamente inteligentes que mejoren nuestra calidad de vida.</p>
+                    <p style="margin-top: 10px; font-style: italic; color: #6f42c1;">La clave está en encontrar el equilibrio perfecto entre privacidad, eficiencia y utilidad.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>📊 Materia: Internet of Things (IoT) | Tema: Almacenamiento de Datos | 2025</p>
+        </div>
+    </div>
+</body>
+</html>
