@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Ambiental</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        canvas {
+            max-width: 700px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lecturas de Temperatura y Humedad</h1>
+    <canvas id="grafica"></canvas>
+
+    <script>
+    var firebaseConfig = {
+          apiKey: "AIzaSyBguZBkfrNLB7QcEDcT0mmgQ_IUuIKNJIw",
+          authDomain: "monitoreoambientaltijuan-7c502.firebaseapp.com",
+          databaseURL: "https://monitoreoambientaltijuan-7c502-default-rtdb.firebaseio.com",
+          projectId: "monitoreoambientaltijuan-7c502",
+          storageBucket: "monitoreoambientaltijuan-7c502.firebasestorage.app",
+          messagingSenderId: "814734709760",
+          appId: "1:814734709760:web:2b6a875e96c62f547474e5",
+          measurementId: "G-XZTPL521BE"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.database();
+
+    let etiquetas = [];
+    let temperaturas = [];
+    let humedades = [];
+    let graficaActual = null;
+
+    db.ref("lecturas/dht11").on("value", function (snapshot) {
+        const data = snapshot.val();
+        etiquetas = [];
+        temperaturas = [];
+        humedades = [];
+
+        for (let clave in data) {
+            const entrada = data[clave];
+            etiquetas.push(entrada.fecha || "");
+            temperaturas.push(entrada.temperatura);
+            humedades.push(entrada.humedad);
+        }
+
+        mostrarGrafica();
+    });
+
+    function mostrarGrafica() {
+        const ctx = document.getElementById('grafica').getContext('2d');
+
+        if (graficaActual) {
+            graficaActual.destroy();
+        }
+
+        graficaActual = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: etiquetas,
+                datasets: [
+                    {
+                        label: 'Temperatura (°C)',
+                        data: temperaturas,
+                        borderColor: 'red',
+                        fill: false
+                    },
+                    {
+                        label: 'Humedad (%)',
+                        data: humedades,
+                        borderColor: 'blue',
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'Fecha y hora' } },
+                    y: { title: { display: true, text: 'Valor' } }
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+
+</html>
